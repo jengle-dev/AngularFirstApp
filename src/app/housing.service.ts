@@ -4,8 +4,11 @@ import { HousingLocation } from './housinglocation'; // Import the HousingLocati
 @Injectable({
   providedIn: 'root'
 })
+
 export class HousingService {
   readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
+    
+  // Define the list of housing locations with their properties in an array.
     housingLocationList: HousingLocation[] = [
       {
         id: 0,
@@ -112,8 +115,10 @@ export class HousingService {
     getAllHousingLocations(): HousingLocation[] {
       return this.housingLocationList;
     }
+
     getHousingLocationById(id: number): HousingLocation | undefined {
       return this.housingLocationList.find((housingLocation) => housingLocation.id === id);
     }
+    
   constructor() { }
 }
