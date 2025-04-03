@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common'; // tutorial has this
+import { CommonModule } from '@angular/common'; 
 import { HousingLocation } from '../housinglocation'; // Import the HousingLocation model
 
 @Component({
@@ -8,10 +8,10 @@ import { HousingLocation } from '../housinglocation'; // Import the HousingLocat
   template: `
     <section class="listing">
       <img
-        class="listing-photo"
-        [src]="housingLocation.photo"
-        alt="Exterior photo of {{ housingLocation.name }}"
-        crossorigin
+          class="listing-photo"
+          [src]="housingLocation.photo"
+          alt="Exterior photo of {{ housingLocation.name }}"
+          crossorigin
       />
       <h2 class="listing-heading">{{ housingLocation.name }}</h2>
       <p class="listing-location">{{ housingLocation.city }}, {{ housingLocation.state }}</p>

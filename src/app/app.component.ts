@@ -1,16 +1,18 @@
-import {Component} from '@angular/core';
-import {HomeComponent} from './home/home.component'; // After creating a new component, import it in the app.compmonent.ts
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [HomeComponent], // Import the HomeComponent here to use it in the template
+  imports: [RouterLink, RouterOutlet], // Import RouterLink and RouterOutlet
   template: `
      <main>
-      <header class="brand-name">
-        <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
-      </header>
+      <a [routerLink]="['/']">
+        <header class="brand-name">
+          <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
+        </header>
+      </a>
       <section class="content">
-        <app-home></app-home>
+        <router-outlet></router-outlet> <!-- Dynamically load components here -->
       </section>
     </main>
   `,
