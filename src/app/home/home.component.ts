@@ -10,13 +10,13 @@ import { HousingService } from '../housing.service'; // Import the HousingServic
   template: `
     <section>
       <form>
-        <input type="text" placeholder="Filter by city" />
-        <button class="primary" type="button">Search</button>
+        <input type="text" placeholder="Filter by city" #filter />
+        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
       </form>
     </section>
     <section class="results">
    <app-housing-location
-        *ngFor="let housingLocation of housingLocationList"
+        *ngFor="let housingLocation of filteredLocationList"
         [housingLocation]="housingLocation"
       ></app-housing-location>
     </section>
@@ -27,9 +27,28 @@ import { HousingService } from '../housing.service'; // Import the HousingServic
 export class HomeComponent {
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
+  // new filteredLoctaionList property to hold the filtered list of housing locations
+  filteredLocationList: HousingLocation[] = [];
 
   constructor() {
+    //get the list of housing locations from the HousingService and assign it to the housingLocationList property
     this.housingLocationList = this.housingService.getAllHousingLocations();
+    // Initialize the filteredLocationList with the full list of housing locations
+    this.filteredLocationList = this.housingLocationList;
+  }
+
+  filterResults(text: string) {
+    // This component is responsible for displaying the list of housing locations and filtering them based on user input.
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList;
+      return; // If the input text is empty, reset the filteredLocationList to the full list of housing locations
+    }
+
+    // Filter the housingLocationList based on the input text and update the filteredLocationList property
+    // The filter method creates a new array with all elements that pass the test implemented by the provided function.
+    this.filteredLocationList = this.housingLocationList.filter((housingLocation) =>
+      housingLocation?.city.toLowerCase().includes(text.toLowerCase()),
+    );
   }
 }
 
