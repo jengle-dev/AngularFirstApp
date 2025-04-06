@@ -59,7 +59,9 @@ export class DetailsComponent {
 
   constructor() {
     this.housingLocationId = Number(this.route.snapshot.params['id']); // Convert the 'id' parameter to a number
-    this.housingLocation = this.housingService.getHousingLocationById(this.housingLocationId); // Fetch the housing location details
+    this.housingService.getHousingLocationById(this.housingLocationId).then(location => {
+      this.housingLocation = location; // Fetch the housing location details
+    });
   }
   submitApplication() {
     this.housingService.submitApplication(

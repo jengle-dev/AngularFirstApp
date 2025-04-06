@@ -34,9 +34,11 @@ export class HomeComponent {
 
   constructor() {
     //get the list of housing locations from the HousingService and assign it to the housingLocationList property
-    this.housingLocationList = this.housingService.getAllHousingLocations();
-    // Initialize the filteredLocationList with the full list of housing locations
-    this.filteredLocationList = this.housingLocationList;
+    this.housingService.getAllHousingLocations().then((locations) => {
+      this.housingLocationList = locations;
+      // Initialize the filteredLocationList with the full list of housing locations
+      this.filteredLocationList = this.housingLocationList;
+    });
   }
 
   filterResults(text: string) {
